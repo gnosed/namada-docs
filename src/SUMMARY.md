@@ -14,5 +14,7 @@
   - [Genesis validator setup](./user-guide/genesis-validator-setup.md)
   <!-- - [The Intent gossiper and Matchmaker](./user-guide/intent-gossiper-and-matchmaker.md) -->
 - [Testnets](./testnets/README.md)
-  - [Internal Testnet 1](./testnets/internal-testnet-1.md)
   - [Namada Close Quarters Testnet 1](./testnets/namada-close-quarters-testnet-1.md)
+  - [MASP + Governance devnet 1](./testnets/gov-masp-devnet-1.md)
+- [Archive](./archive/README.md)
+  - [Internal Testnet 1](./testnets/internal-testnet-1.md)
