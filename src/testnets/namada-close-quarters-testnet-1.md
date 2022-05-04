@@ -22,7 +22,7 @@ You will need to compile the binaries from source yourself, make sure you have c
 ### Prerequisites
 
 - a machine that meets the [requirements](../user-guide/install.md#hardware-requirements) for running a validator node
-- an associated public IPv4 address with ports 26656 and 26657 reachable from anywhere
+- an associated public IPv4 address with ports 26656 reachable from anywhere for P2P connections
 
 ### Set up
 
