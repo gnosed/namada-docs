@@ -1,0 +1,42 @@
+name: github pages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+          key: ${{ runner.os }}-cargo-v1
+      
+      - name: Install cargo deps
+        run: |
+          which mdbook || cargo install mdbook &&
+          which mdbook-linkcheck || cargo install mdbook-linkcheck &&
+          which mdbook-open-on-gh || cargo install mdbook-open-on-gh &&
+          which mdbook-admonish || cargo install mdbook-admonish
+        
+      - run: mdbook build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book/html
+          cname: docs.anoma.net
