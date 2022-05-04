@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="quick-start.html"><strong aria-hidden="true">2.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="user-guide/index.html"><strong aria-hidden="true">3.</strong> User Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/install.html"><strong aria-hidden="true">3.1.</strong> Install</a></li><li class="chapter-item expanded "><a href="user-guide/getting-started.html"><strong aria-hidden="true">3.2.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="user-guide/wallet.html"><strong aria-hidden="true">3.3.</strong> The Wallet</a></li><li class="chapter-item expanded "><a href="user-guide/ledger.html"><strong aria-hidden="true">3.4.</strong> The Ledger</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/ledger/pos.html"><strong aria-hidden="true">3.4.1.</strong> Interact with PoS</a></li><li class="chapter-item expanded "><a href="user-guide/ledger/governance.html"><strong aria-hidden="true">3.4.2.</strong> Governance</a></li><li class="chapter-item expanded "><a href="user-guide/ledger/masp.html"><strong aria-hidden="true">3.4.3.</strong> MASP</a></li><li class="chapter-item expanded "><a href="user-guide/ledger/customize.html"><strong aria-hidden="true">3.4.4.</strong> Customize</a></li></ol></li><li class="chapter-item expanded "><a href="user-guide/genesis-validator-setup.html"><strong aria-hidden="true">3.5.</strong> Genesis validator setup</a></li></ol></li><li class="chapter-item expanded "><a href="testnets/index.html"><strong aria-hidden="true">4.</strong> Testnets</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="testnets/internal-testnet-1.html"><strong aria-hidden="true">4.1.</strong> Internal Testnet 1</a></li><li class="chapter-item expanded "><a href="testnets/namada-close-quarters-testnet-1.html"><strong aria-hidden="true">4.2.</strong> Namada Close Quarters Testnet 1</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="quick-start.html"><strong aria-hidden="true">2.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="user-guide/index.html"><strong aria-hidden="true">3.</strong> User Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/install.html"><strong aria-hidden="true">3.1.</strong> Install</a></li><li class="chapter-item expanded "><a href="user-guide/getting-started.html"><strong aria-hidden="true">3.2.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="user-guide/wallet.html"><strong aria-hidden="true">3.3.</strong> The Wallet</a></li><li class="chapter-item expanded "><a href="user-guide/ledger.html"><strong aria-hidden="true">3.4.</strong> The Ledger</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/ledger/pos.html"><strong aria-hidden="true">3.4.1.</strong> Interact with PoS</a></li><li class="chapter-item expanded "><a href="user-guide/ledger/governance.html"><strong aria-hidden="true">3.4.2.</strong> Governance</a></li><li class="chapter-item expanded "><a href="user-guide/ledger/masp.html"><strong aria-hidden="true">3.4.3.</strong> MASP</a></li><li class="chapter-item expanded "><a href="user-guide/ledger/customize.html"><strong aria-hidden="true">3.4.4.</strong> Customize</a></li></ol></li><li class="chapter-item expanded "><a href="user-guide/genesis-validator-setup.html"><strong aria-hidden="true">3.5.</strong> Genesis validator setup</a></li></ol></li><li class="chapter-item expanded "><a href="testnets/index.html"><strong aria-hidden="true">4.</strong> Testnets</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="testnets/namada-close-quarters-testnet-1.html"><strong aria-hidden="true">4.1.</strong> Namada Close Quarters Testnet 1</a></li><li class="chapter-item expanded "><a href="testnets/gov-masp-devnet-1.html"><strong aria-hidden="true">4.2.</strong> MASP + Governance devnet 1</a></li></ol></li><li class="chapter-item expanded "><a href="archive/index.html"><strong aria-hidden="true">5.</strong> Archive</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="testnets/internal-testnet-1.html"><strong aria-hidden="true">5.1.</strong> Internal Testnet 1</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -969,6 +969,52 @@ anoma client utils init-genesis-validator \
 <ul>
 <li>Connect to <a href="testnets/internal-testnet-1.html">Internal Testnet 1</a> and try MASP commands</li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="namada-close-quarters-testnet-1"><a class="header" href="#namada-close-quarters-testnet-1">Namada Close Quarters Testnet 1</a></h1>
+<p>This testnet introduces the following new features:</p>
+<ul>
+<li><a href="testnets/../user-guide/ledger/governance.html">on-chain governance</a> - create and vote for proposals both onchain and offchain</li>
+<li><a href="testnets/../user-guide/ledger/masp.html">MASP (multi-asset shielded pool) transfers</a> - make private transfers of any Namada token</li>
+</ul>
+<p>Future testnets will include more features as described in <a href="https://specs.anoma.net/master/architecture/namada.html">the Namada spec</a>, like IBC (inter-blockchain communication protocol), bridging to the Ethereum blockchain and more.</p>
+<h2 id="status"><a class="header" href="#status">Status</a></h2>
+<ul>
+<li>2021-05-02 - we are currently preparing to launch the chain. Applications are open for people to be genesis validators.</li>
+</ul>
+<h2 id="chain-information"><a class="header" href="#chain-information">Chain information</a></h2>
+<p>Chain ID: TBD</p>
+<p>You will need to compile the binaries from source yourself, make sure you have checked out the specific commit <code>f1afdffd5e43ad4bb448db7bf5bc1e23464350f7</code> to build from, then follow <a href="testnets/../user-guide/install.html#from-source">the building from source guide</a>.</p>
+<h2 id="applying-to-be-a-genesis-validator"><a class="header" href="#applying-to-be-a-genesis-validator">Applying to be a genesis validator</a></h2>
+<h3 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h3>
+<ul>
+<li>a machine that meets the <a href="testnets/../user-guide/install.html#hardware-requirements">requirements</a> for running a validator node</li>
+<li>an associated public IPv4 address with ports 26656 reachable from anywhere for P2P connections</li>
+</ul>
+<h3 id="set-up"><a class="header" href="#set-up">Set up</a></h3>
+<p>Follow <a href="testnets/../user-guide/genesis-validator-setup.html#pre-genesis">this guide</a> on how to generate your &quot;pre-genesis&quot; validator files.</p>
+<p>After this, you'll have a <code>validator.toml</code> file, the contents of which will look something like the following:</p>
+<pre><code class="language-toml">[validator.1337-validator]
+consensus_public_key = &quot;00056fff5232da385d88428ca2bb2012a4d83cdf5c697864dde34b393333a72268&quot;
+account_public_key = &quot;00f1bd321be2e23b9503653dd50fcd5177ca43a0ade6da60108eaecde0d68abdc8&quot;
+staking_reward_public_key = &quot;005725f952115838590fc7c5dd9590bc054ac4bd5af55672a40df4ac7dca50ce97&quot;
+protocol_public_key = &quot;0054c213d2f8fe2dd3fc5a41a52fd2839cb49643d960d7f75e993202692c5d8783&quot;
+dkg_public_key = &quot;6000000054eafa7320ddebf00c9487e5f7ea5107a8444f042b74caf9ed5679163f854577bf4d0992a8fd301ec4f3438c9934c617a2c71649178e536f7e2a8cdc1f8331139b7fd9b4d36861f0a9915d83f61d7f969219f0eba95bb6fa45595425923d4c0e&quot;
+net_address = &quot;1.2.3.4:26656&quot;
+tendermint_node_key = &quot;00e1a8fe1abceb700063ab4558baec680b64247e2fd9891962af552b9e49318d8d&quot;
+</code></pre>
+<p>This file contains only public information and is safe to share publicly. If you want to be a genesis validator for this testnet, please make a pull request to <a href="https://github.com/anoma/namada-testnets">https://github.com/anoma/namada-testnets</a> adding your <code>validator.toml</code> file to the <code>namada-close-quarters-testnet-1/</code> directory, renaming it to <code>$alias.toml</code>. e.g. if you chose your alias to be &quot;bertha&quot;, submit the file with the name <code>bertha.toml</code>. You can see what an example PR looks like <a href="https://github.com/anoma/namada-testnets/pull/1">here</a>.</p>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/testnets/namada-close-quarters-testnet-1.md">Edit this file on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="masp--governance-devnet"><a class="header" href="#masp--governance-devnet">MASP + Governance devnet</a></h1>
+<p>This devnet contains the following new features:</p>
+<ul>
+<li><a href="testnets/../user-guide/ledger/governance.html">on-chain governance</a> - create and vote for proposals both onchain and offchain</li>
+<li><a href="testnets/../user-guide/ledger/masp.html">MASP (multi-asset shielded pool) transfers</a> - make private transfers of any Namada token</li>
+</ul>
+<p>Latest values regarding the testnet that would be useful to have in your shell:</p>
+<pre><code class="language-shell">export ANOMA_TESTNET_CHAIN_ID='anoma-gov-masp.3f1b25f2ee35b2e'
+export ANOMA_TESTNET_COMMIT='f1afdffd5e43ad4bb448db7bf5bc1e23464350f7'
+</code></pre>
+<p>You can install Namada by following the instructions from the <a href="testnets/../user-guide/install.html">Install User Guide</a>. Note that the binaries should be built from <code>$ANOMA_TESTNET_COMMIT</code> rather than <code>master</code> or a release tag like <code>v0.5.0</code>.</p>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/testnets/gov-masp-devnet-1.md">Edit this file on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="archive"><a class="header" href="#archive">Archive</a></h1>
+<p>The archive contains deprecated pages.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="internal-testnet-1"><a class="header" href="#internal-testnet-1">Internal Testnet 1</a></h1>
 <blockquote>
 <p>⚠️ the values below might change frequently.</p>
@@ -1099,40 +1145,7 @@ specified. However, any transparent account can sign these transactions.</p>
 2022-03-30T07:21:09.232794Z  INFO anoma_apps::node::ledger: Anoma ledger node started.
 2022-03-30T07:21:09.232849Z  INFO anoma_apps::node::ledger: Anoma ledger node has shut down.
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/testnets/internal-testnet-1.md">Edit this file on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="namada-close-quarters-testnet-1"><a class="header" href="#namada-close-quarters-testnet-1">Namada Close Quarters Testnet 1</a></h1>
-<p>This testnet introduces the following new features:</p>
-<ul>
-<li><a href="testnets/../user-guide/ledger/governance.html">on-chain governance</a> - create and vote for proposals both onchain and offchain</li>
-<li><a href="testnets/../user-guide/ledger/masp.html">MASP (multi-asset shielded pool) transfers</a> - make private transfers of any Namada token</li>
-</ul>
-<p>Future testnets will include more features as described in <a href="https://specs.anoma.net/master/architecture/namada.html">the Namada spec</a>, like IBC (inter-blockchain communication protocol), bridging to the Ethereum blockchain and more.</p>
-<h2 id="status"><a class="header" href="#status">Status</a></h2>
-<ul>
-<li>2021-05-02 - we are currently preparing to launch the chain. Applications are open for people to be genesis validators.</li>
-</ul>
-<h2 id="chain-information"><a class="header" href="#chain-information">Chain information</a></h2>
-<p>Chain ID: TBD</p>
-<p>You will need to compile the binaries from source yourself, make sure you have checked out the specific commit <code>f1afdffd5e43ad4bb448db7bf5bc1e23464350f7</code> to build from, then follow <a href="testnets/../user-guide/install.html#from-source">the building from source guide</a>.</p>
-<h2 id="applying-to-be-a-genesis-validator"><a class="header" href="#applying-to-be-a-genesis-validator">Applying to be a genesis validator</a></h2>
-<h3 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h3>
-<ul>
-<li>a machine that meets the <a href="testnets/../user-guide/install.html#hardware-requirements">requirements</a> for running a validator node</li>
-<li>an associated public IPv4 address with ports 26656 reachable from anywhere for P2P connections</li>
-</ul>
-<h3 id="set-up"><a class="header" href="#set-up">Set up</a></h3>
-<p>Follow <a href="testnets/../user-guide/genesis-validator-setup.html#pre-genesis">this guide</a> on how to generate your &quot;pre-genesis&quot; validator files.</p>
-<p>After this, you'll have a <code>validator.toml</code> file, the contents of which will look something like the following:</p>
-<pre><code class="language-toml">[validator.1337-validator]
-consensus_public_key = &quot;00056fff5232da385d88428ca2bb2012a4d83cdf5c697864dde34b393333a72268&quot;
-account_public_key = &quot;00f1bd321be2e23b9503653dd50fcd5177ca43a0ade6da60108eaecde0d68abdc8&quot;
-staking_reward_public_key = &quot;005725f952115838590fc7c5dd9590bc054ac4bd5af55672a40df4ac7dca50ce97&quot;
-protocol_public_key = &quot;0054c213d2f8fe2dd3fc5a41a52fd2839cb49643d960d7f75e993202692c5d8783&quot;
-dkg_public_key = &quot;6000000054eafa7320ddebf00c9487e5f7ea5107a8444f042b74caf9ed5679163f854577bf4d0992a8fd301ec4f3438c9934c617a2c71649178e536f7e2a8cdc1f8331139b7fd9b4d36861f0a9915d83f61d7f969219f0eba95bb6fa45595425923d4c0e&quot;
-net_address = &quot;1.2.3.4:26656&quot;
-tendermint_node_key = &quot;00e1a8fe1abceb700063ab4558baec680b64247e2fd9891962af552b9e49318d8d&quot;
-</code></pre>
-<p>This file contains only public information and is safe to share publicly. If you want to be a genesis validator for this testnet, please make a pull request to <a href="https://github.com/anoma/namada-testnets">https://github.com/anoma/namada-testnets</a> adding your <code>validator.toml</code> file to the <code>namada-close-quarters-testnet-1/</code> directory, renaming it to <code>$alias.toml</code>. e.g. if you chose your alias to be &quot;bertha&quot;, submit the file with the name <code>bertha.toml</code>. You can see what an example PR looks like <a href="https://github.com/anoma/namada-testnets/pull/1">here</a>.</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/testnets/namada-close-quarters-testnet-1.md">Edit this file on GitHub.</a></footer>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/testnets/internal-testnet-1.md">Edit this file on GitHub.</a></footer>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
