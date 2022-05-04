@@ -26,7 +26,7 @@ You will need to compile the binaries from source yourself, make sure you have c
 
 ### Set up
 
-Follow [this guide](../user-guide/genesis-validator-setup.md#Pre-genesis) on how to generate your "pre-genesis" validator files.
+Follow [this guide](../user-guide/genesis-validator-setup.md#pre-genesis) on how to generate your "pre-genesis" validator files.
 
 After this, you'll have a `validator.toml` file, the contents of which will look something like the following:
 
