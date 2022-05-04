@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="quick-start.html"><strong aria-hidden="true">2.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="user-guide/index.html"><strong aria-hidden="true">3.</strong> User Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/install.html"><strong aria-hidden="true">3.1.</strong> Install</a></li><li class="chapter-item expanded "><a href="user-guide/getting-started.html"><strong aria-hidden="true">3.2.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="user-guide/wallet.html"><strong aria-hidden="true">3.3.</strong> The Wallet</a></li><li class="chapter-item expanded "><a href="user-guide/ledger.html"><strong aria-hidden="true">3.4.</strong> The Ledger</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/ledger/pos.html"><strong aria-hidden="true">3.4.1.</strong> Interact with PoS</a></li><li class="chapter-item expanded "><a href="user-guide/ledger/customize.html"><strong aria-hidden="true">3.4.2.</strong> Customize</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="testnets/index.html"><strong aria-hidden="true">4.</strong> Testnets</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="testnets/internal-testnet-1.html"><strong aria-hidden="true">4.1.</strong> Internal Testnet 1</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="quick-start.html"><strong aria-hidden="true">2.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="user-guide/index.html"><strong aria-hidden="true">3.</strong> User Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/install.html"><strong aria-hidden="true">3.1.</strong> Install</a></li><li class="chapter-item expanded "><a href="user-guide/getting-started.html"><strong aria-hidden="true">3.2.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="user-guide/wallet.html"><strong aria-hidden="true">3.3.</strong> The Wallet</a></li><li class="chapter-item expanded "><a href="user-guide/ledger.html"><strong aria-hidden="true">3.4.</strong> The Ledger</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-guide/ledger/pos.html"><strong aria-hidden="true">3.4.1.</strong> Interact with PoS</a></li><li class="chapter-item expanded "><a href="user-guide/ledger/governance.html"><strong aria-hidden="true">3.4.2.</strong> Governance</a></li><li class="chapter-item expanded "><a href="user-guide/ledger/masp.html"><strong aria-hidden="true">3.4.3.</strong> MASP</a></li><li class="chapter-item expanded "><a href="user-guide/ledger/customize.html"><strong aria-hidden="true">3.4.4.</strong> Customize</a></li></ol></li><li class="chapter-item expanded "><a href="user-guide/genesis-validator-setup.html"><strong aria-hidden="true">3.5.</strong> Genesis validator setup</a></li></ol></li><li class="chapter-item expanded "><a href="testnets/index.html"><strong aria-hidden="true">4.</strong> Testnets</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="testnets/internal-testnet-1.html"><strong aria-hidden="true">4.1.</strong> Internal Testnet 1</a></li><li class="chapter-item expanded "><a href="testnets/namada-close-quarters-testnet-1.html"><strong aria-hidden="true">4.2.</strong> Namada Close Quarters Testnet 1</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -647,7 +647,192 @@ environment variable names).</p>
 <p>When the chain reaches the epoch in which you can withdraw the tokens (or anytime after), you can submit a withdrawal of unbonded tokens back to your validator account:</p>
 <pre><code class="language-shell">anoma client withdraw --validator my-validator
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/user-guide/ledger/pos.md">Edit this file on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="customize-accounts-and-transactions"><a class="header" href="#customize-accounts-and-transactions">Customize accounts and transactions</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/user-guide/ledger/pos.md">Edit this file on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-to-governance"><a class="header" href="#introduction-to-governance">Introduction to governance</a></h1>
+<p>The anoma governance mechanism gives users the possibility to upgrade the protocol dynamically.
+There are two different mechanism to create a proposal:</p>
+<ul>
+<li>On-chain: Proposal is voted on and tallied on-chain. This can optionally include proposal code to be executed if the proposal is accepted.</li>
+<li>Off-chain</li>
+</ul>
+<h2 id="on-chain-proposals"><a class="header" href="#on-chain-proposals">On-chain proposals</a></h2>
+<h3 id="create-a-proposal"><a class="header" href="#create-a-proposal">Create a proposal</a></h3>
+<p>Assuming you have an account with at least 500 NAM token (in this example we are going to use <code>my-new-acc</code>), lets get the corresponding address</p>
+<pre><code class="language-shell">anoma wallet address find --alias `my-new-acc`
+</code></pre>
+<p>Now, we need to create a json file <code>proposal.json</code> holding the content of our proposal. Copy the below text into a json file.</p>
+<pre><code class="language-json">{
+    &quot;content&quot;: {
+        &quot;title&quot;: &quot;Proposal title&quot;,
+        &quot;authors&quot;: &quot;email@proposal.n&quot;,
+        &quot;discussions-to&quot;: &quot;www.github.com/anoma/aip/1&quot;,
+        &quot;created&quot;: &quot;2022-03-10T08:54:37Z&quot;,
+        &quot;license&quot;: &quot;MIT&quot;,
+        &quot;abstract&quot;: &quot;Ut convallis eleifend orci vel venenatis. Duis vulputate metus in lacus sollicitudin vestibulum. Suspendisse vel velit ac est consectetur feugiat nec ac urna. Ut faucibus ex nec dictum fermentum. Morbi aliquet purus at sollicitudin ultrices. Quisque viverra varius cursus. Praesent sed mauris gravida, pharetra turpis non, gravida eros. Nullam sed ex justo. Ut at placerat ipsum, sit amet rhoncus libero. Sed blandit non purus non suscipit. Phasellus sed quam nec augue bibendum bibendum ut vitae urna. Sed odio diam, ornare nec sapien eget, congue viverra enim.&quot;,
+        &quot;motivation&quot;: &quot;Ut convallis eleifend orci vel venenatis. Duis vulputate metus in lacus sollicitudin vestibulum. Suspendisse vel velit ac est consectetur feugiat nec ac urna. Ut faucibus ex nec dictum fermentum. Morbi aliquet purus at sollicitudin ultrices.&quot;,
+        &quot;details&quot;: &quot;Ut convallis eleifend orci vel venenatis. Duis vulputate metus in lacus sollicitudin vestibulum. Suspendisse vel velit ac est consectetur feugiat nec ac urna. Ut faucibus ex nec dictum fermentum. Morbi aliquet purus at sollicitudin ultrices. Quisque viverra varius cursus. Praesent sed mauris gravida, pharetra turpis non, gravida eros.&quot;,
+        &quot;requires&quot;: &quot;2&quot;
+    },
+    &quot;author&quot;: &quot;TODO&quot;,
+    &quot;voting_start_epoch&quot;: 3,
+    &quot;voting_end_epoch&quot;: 6,
+    &quot;grace_epoch&quot;: 12,
+    &quot;proposal_code_path&quot;: &quot;./wasm_for_tests/tx_no_op.wasm&quot;
+}
+</code></pre>
+<p>You should change the value of:</p>
+<ul>
+<li><code>Author</code> field with the address of <code>my-new-acc</code>.</li>
+<li><code>voting_start_epoch</code> with future epoch (must be a multiple of 3)</li>
+<li><code>voting_end_epoch</code> with an epoch greater of <code>voting_start_epoch</code>, multiple of 3.</li>
+<li><code>grace_epoch</code> with an epoch greater of <code>voting_end_epoch</code> + 6</li>
+<li><code>proposal_code_path</code> with the absolute path of the wasm file to execute (or remove the field completely)</li>
+</ul>
+<p>As soon as your <code>proposal.json</code> file is ready, you can submit the proposal with (making sure to be in the same directory as the <code>proposal.json</code> file):</p>
+<pre><code class="language-shell">anoma client init-proposal --data-path proposal.json 
+</code></pre>
+<p>The transaction should have been accepted. You can query all the proposals with:</p>
+<pre><code class="language-shell">anoma client query-proposal
+</code></pre>
+<p>or a single proposal with</p>
+<pre><code class="language-shell">anoma client query-proposal --proposal-id 0
+</code></pre>
+<p>where <code>0</code> is the proposal id.</p>
+<h3 id="vote-a-proposal"><a class="header" href="#vote-a-proposal">Vote a proposal</a></h3>
+<p>Only validator and delegators can vote. Assuming you have a validator/delegator account (in this example we are going to use <code>validator</code>), you can send a vote with the following command:</p>
+<pre><code class="language-shell">anoma client vote-proposal \
+    --proposal-id 0 \
+    --vote yay \
+    --signer validator
+</code></pre>
+<p>where <code>--vote</code> can be either <code>yay</code> or <code>nay</code>.</p>
+<h3 id="check-the-result"><a class="header" href="#check-the-result">Check the result</a></h3>
+<p>As soon as the ledger reaches epoch definied in the json as <code>voting_end_epoch</code>, you can no longer vote. The code definied in <code>proposal_code</code> json field will be executed at the beginning of <code>grace_epoch</code> epoch. You can use the following commands to check the status of a proposal:</p>
+<pre><code class="language-shell">anoma client query-proposal --proposal-id 0
+</code></pre>
+<p>or to just check the result:</p>
+<pre><code class="language-shell">anoma client query-proposal-result --proposal-id 0
+</code></pre>
+<h2 id="off-chain-proposals"><a class="header" href="#off-chain-proposals">Off-chain proposals</a></h2>
+<h3 id="create-proposal"><a class="header" href="#create-proposal">Create proposal</a></h3>
+<p>Create the same json file as in the on-chain proposal and use the following command:</p>
+<pre><code class="language-shell">anoma client init-proposal \
+    --data-path proposal.json \
+    --offline
+</code></pre>
+<p>This command will create a <code>proposal</code> file same directory where the command was launched.</p>
+<h3 id="vote-proposal"><a class="header" href="#vote-proposal">Vote proposal</a></h3>
+<p>To vote an offline proposal use the following command:</p>
+<pre><code class="language-shell">anoma client vote-proposal --data-path proposal \
+    --vote yay \
+    --signer validator \
+    --offline
+</code></pre>
+<p>This command will create a <code>proposal-vote-${address}</code> file (where address is the <code>--signer</code> address).</p>
+<h3 id="tally-off-chain-proposal"><a class="header" href="#tally-off-chain-proposal">Tally off-chain proposal</a></h3>
+<p>To compute the tally for an offline proposal we need to collect</p>
+<ul>
+<li><code>proposal</code> file (must have this name)</li>
+<li>all the <code>proposal-vote-${address}</code> files</li>
+</ul>
+<p>All those files will have to be in a folder (lets call it <code>offline-proposal</code>).</p>
+<p>Now you can use the following command:</p>
+<pre><code class="language-shell">anoma client query-proposal-result \
+    --offline \
+    --data-path `offline-proposal`
+</code></pre>
+<p>which will tell you the proposal result.</p>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/user-guide/ledger/governance.md">Edit this file on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="masp"><a class="header" href="#masp">MASP</a></h1>
+<h2 id="using-masp"><a class="header" href="#using-masp">Using MASP</a></h2>
+<h3 id="shielded-transfers"><a class="header" href="#shielded-transfers">Shielded transfers</a></h3>
+<p>Shielded balances are owned by a particular spending key.</p>
+<p>To try out shielded transfers, you will first need an ordinary
+transparent account with some token balance. Example commands for that:</p>
+<pre><code class="language-shell">anomaw address gen --alias my-implicit
+
+anomac init-account \
+    --source my-implicit \
+    --public-key my-implicit \
+    --alias my-established
+
+anomac transfer \
+    --token btc \
+    --amount 1000 \
+    --source faucet \
+    --target my-established \
+    --signer my-established
+</code></pre>
+<p>The testnet tokens which the faucet can provide you are named <code>XAN</code>,
+<code>BTC</code>, <code>ETH</code>, <code>DOT</code>, <code>Schnitzel</code>, <code>Apfel</code>, and <code>Kartoffel</code>. The faucet
+will transfer these in increments of 1000 at a time.</p>
+<p>Once you have an ordinary transparent account with some tokens, you
+should generate a spending key to hold your shielded balances. You
+can randomly generate one with e.g. <code>anomaw masp gen-key --alias [your spending key alias]</code>.
+This command will also generate a corresponding viewing key sharing
+the same alias.</p>
+<p>Shielded transfers work with the <code>anomac transfer</code> command. <code>--source</code>
+can be supplied with a spending key alias to spend a shielded balance, but
+if you are following along, you don't have a shielded balance to spend yet.
+<code>--target</code> can be supplied with a shielded payment address to create a shielded
+balance.</p>
+<p>To create a payment address from your spending key, use:</p>
+<pre><code class="language-shell">anomaw masp gen-addr \
+    --key [your viewing key alias] \
+    --alias [your payment address alias]
+</code></pre>
+<p>This will generate a different payment address each time you run it.
+Payment addresses can be reused or discarded as you like, and can't be
+correlated with one another.</p>
+<p>Once you have a payment address, transfer a balance from your
+transparent account to your shielded spending key with something like:</p>
+<pre><code class="language-shell">anomac transfer \
+    --source my-established \
+    --target [your payment address alias] \
+    --token btc \
+    --amount 100
+</code></pre>
+<p>Once this transfer goes through, you can view your viewing key's
+balance:</p>
+<pre><code class="language-shell">anomac balance --owner [your viewing key alias]
+</code></pre>
+<p>Now that you have a shielded balance, it can either be transferred to a
+different shielded payment address (shielded to shielded):</p>
+<pre><code class="language-shell">anomac transfer \
+    --source [your spending key] \
+    --target [someone's payment address] \
+    --token btc \
+    --amount 50 \
+    --signer my-established
+</code></pre>
+<p>or to a transparent account (shielded to transparent):</p>
+<pre><code class="language-shell">anomac transfer \
+    --source [your spending key] \
+    --target [some transparent account] \
+    --token btc \
+    --amount 50 \
+    --signer my-established
+</code></pre>
+<p>Note that for the second last type of transfer, <code>--signer</code> must be
+specified. However, any transparent account can sign these transactions.</p>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<h3 id="setup-the-masp-parameters"><a class="header" href="#setup-the-masp-parameters">Setup the MASP parameters</a></h3>
+<p>Namada uses a multi-asset shielded pool (MASP) to enable private transfers. The pool relies on three circuits which require each individually their randomly generated parameters to work.</p>
+<blockquote>
+<p>⚠️ Normally, the parameters are downloaded through the <code>masp</code> crate by the client, but in case of troubles you should get them from someone in the team and follow the instructions below.</p>
+</blockquote>
+<!-- You can download the parameters with:
+```bash
+[command]
+``` -->
+<p>The parameters need to be extracted to the correct folder where the node will read the parameters from.</p>
+<h4 id="ubuntu"><a class="header" href="#ubuntu">Ubuntu</a></h4>
+<pre><code class="language-shell">mkdir ~/.masp-params
+tar -xvf masp-params.tar.gz ~/.masp-params
+</code></pre>
+<h4 id="mac"><a class="header" href="#mac">Mac</a></h4>
+<pre><code class="language-shell">mkdir ~/Library/Application\ Support/MASPParams/
+tar -xvf masp-params.tar.gz ~/Library/Application\ Support/MASPParams/
+</code></pre>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/user-guide/ledger/masp.md">Edit this file on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="customize-accounts-and-transactions"><a class="header" href="#customize-accounts-and-transactions">Customize accounts and transactions</a></h1>
 <p>On this page, we'll cover how to tailor your account(s) to your use-case with custom-made validity predicates and transactions.</p>
 <p>We currently only support Rust for custom validity predicates and transactions via WASM, but expect many more options to be available in the future!</p>
 <h2 id="-anoma-accounts-primer"><a class="header" href="#-anoma-accounts-primer">👩🏽‍🏫 Anoma accounts primer</a></h2>
@@ -741,7 +926,45 @@ fn apply_tx(tx_data: Vec&lt;u8&gt;) {
 <pre><code class="language-shell">anoma client tx --code-path tx_template/tx.wasm
 </code></pre>
 <p>Optionally, you can also attach some data to the transaction from a file with the <code>--data-path</code> argument.</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/user-guide/ledger/customize.md">Edit this file on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="testnets"><a class="header" href="#testnets">Testnets</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/user-guide/ledger/customize.md">Edit this file on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="genesis-validator-setup"><a class="header" href="#genesis-validator-setup">Genesis validator setup</a></h1>
+<h2 id="pre-genesis"><a class="header" href="#pre-genesis">Pre-genesis</a></h2>
+<p>To setup all the <a href="user-guide/genesis-validator-setup.html#required-keys">required keys</a> for a genesis validator for an upcoming network, you can execute the following command with an alias of your choice. Note that this alias is public (the address of your validator account will be visible in every wallet) and must be unique within the network.</p>
+<p>You must also provide a static <code>{IP:port}</code> to the <code>--net-address</code> argument of your future node's P2P address.</p>
+<pre><code class="language-shell">export ALIAS=&quot;1337-validator&quot;
+anoma client utils init-genesis-validator \
+    --alias $ALIAS \
+    --net-address 1.2.3.4:26656
+</code></pre>
+<p>After generating your keys, the command will print something like this:</p>
+<pre><code class="language-shell">Pre-genesis TOML written to .anoma/pre-genesis/1337-validator/validator.toml
+</code></pre>
+<p>This file is the public configuration of your validator. You can safely share this file with the network's organizer, who is responsible for setting up and publishing the finalized genesis file and Anoma configuration for the chain.</p>
+<p>Note that the wallet containing your private keys will also be written into this directory.</p>
+<h2 id="after-network-config-release"><a class="header" href="#after-network-config-release">After network config release</a></h2>
+<p>Once the network is finalized, a new chain ID will be created and released on <a href="https://github.com/heliaxdev/anoma-network-config/releases">anoma-network-config/releases</a> (a custom configs URL can be used instead with <code>ANOMA_NETWORK_CONFIGS_SERVER</code> env var). You can use it to setup your genesis validator node for the <code>--chain-id</code> argument in the command below.</p>
+<pre><code class="language-shell">anoma client utils join-network \
+    --chain-id $CHAIN_ID \
+    --genesis-validator $ALIAS
+</code></pre>
+<p>This command will use your pre-genesis wallet for the given chain and take care of setting up Anoma with Tendermint.</p>
+<p>If you run this command in the same directory that you ran <code>anoma client utils init-genesis-validator</code>, it should find the pre-genesis wallet for you, otherwise you can pass the path to the pre-genesis directory using <code>--pre-genesis-path</code>. e.g.</p>
+<pre><code class="language-shell">anoma client utils join-network \
+    --chain-id $CHAIN_ID \
+    --pre-genesis-path workspace/.anoma/pre-genesis/$ALIAS
+</code></pre>
+<p>Once setup, you can start the ledger as usual with e.g.:</p>
+<pre><code class="language-shell">anoma ledger
+</code></pre>
+<h2 id="required-keys"><a class="header" href="#required-keys">Required keys</a></h2>
+<ul>
+<li>Account key: Can be used to sign transactions that require authorization in the default validator validity predicate, such as a balance transfer.</li>
+<li>Staking rewards key: Can be used to sign transactions on the PoS staking rewards account.</li>
+<li>Protocol key: This key is used by the validator's ledger itself to sign protocol transaction on behalf of the validator.</li>
+<li>DKG key: Special key needed for participation in the DKG protocol</li>
+<li>Consensus key: Used in Tendermint consensus layer. Currently, this key is written to a file which is read by Tendermint.</li>
+<li>Tendermint node key: This key is used to derive Tendermint node ID for P2P connection authentication. This key is also written to a file which is read by Tendermint.</li>
+</ul>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/user-guide/genesis-validator-setup.md">Edit this file on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="testnets"><a class="header" href="#testnets">Testnets</a></h1>
 <p>This section describes how to connect to the various testnets and to test selected features.</p>
 <ul>
 <li>Connect to <a href="testnets/internal-testnet-1.html">Internal Testnet 1</a> and try MASP commands</li>
@@ -768,7 +991,7 @@ export ANOMA_TESTNET_COMMIT='0184e64e044366ec370d1431ddf4691b4bd3a5b4'
 Successfully configured for chain ID anoma-masp-0.3.51d2f83a8412b9`
 </code></pre>
 <p>The above command downloads the folder <code>.anoma</code> which contains a global config file <code>global-config.toml</code>; the genesis file for the specified chain id <code>{chain-id}.toml</code> and its corresponding configuration folder <code>{chain-id}</code> which contains the checksums for the wasm files under <code>wasm</code> and the p2p config <code>config.toml</code>.</p>
-<h3 id="setup-the-masp-parameters"><a class="header" href="#setup-the-masp-parameters">Setup the MASP parameters</a></h3>
+<h3 id="setup-the-masp-parameters-1"><a class="header" href="#setup-the-masp-parameters-1">Setup the MASP parameters</a></h3>
 <p>Namada uses a multi-asset shielded pool (MASP) to enable private transfers. The pool relies on three circuits which require each individually their randomly generated parameters to work.</p>
 <blockquote>
 <p>⚠️ Normally, the parameters are downloaded through the <code>masp</code> crate by the client, but in case of troubles you should get them from someone in the team and follow the instructions below.</p>
@@ -792,7 +1015,7 @@ tar -xvf masp-params.tar.gz ~/Library/Application\ Support/MASPParams/
 </code></pre>
 <p>To keep your node running after closing your terminal, you can optionally use a terminal multiplexer like <code>tmux</code>.</p>
 <h2 id="using-namada"><a class="header" href="#using-namada">Using Namada</a></h2>
-<h3 id="shielded-transfers"><a class="header" href="#shielded-transfers">Shielded transfers</a></h3>
+<h3 id="shielded-transfers-1"><a class="header" href="#shielded-transfers-1">Shielded transfers</a></h3>
 <p>Shielded balances are owned by a particular spending key. In this
 testnet, spending keys are just arbitrary hexadecimal strings, provided
 on the command line.</p>
@@ -850,7 +1073,7 @@ different shielded payment address (shielded to shielded):</p>
 </code></pre>
 <p>Note that for both of these types of transfer, <code>--signer</code> must be
 specified. However, any transparent account can sign these transactions.</p>
-<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<h2 id="troubleshooting-1"><a class="header" href="#troubleshooting-1">Troubleshooting</a></h2>
 <h3 id="build-from-source"><a class="header" href="#build-from-source">Build from Source</a></h3>
 <p>Build the provided validity predicate, transaction and matchmaker wasm modules</p>
 <pre><code class="language-shell">make build-wasm-scripts-docker
@@ -876,7 +1099,40 @@ specified. However, any transparent account can sign these transactions.</p>
 2022-03-30T07:21:09.232794Z  INFO anoma_apps::node::ledger: Anoma ledger node started.
 2022-03-30T07:21:09.232849Z  INFO anoma_apps::node::ledger: Anoma ledger node has shut down.
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/testnets/internal-testnet-1.md">Edit this file on GitHub.</a></footer>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/testnets/internal-testnet-1.md">Edit this file on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="namada-close-quarters-testnet-1"><a class="header" href="#namada-close-quarters-testnet-1">Namada Close Quarters Testnet 1</a></h1>
+<p>This testnet introduces the following new features:</p>
+<ul>
+<li><a href="testnets/../user-guide/ledger/governance.html">on-chain governance</a> - create and vote for proposals both onchain and offchain</li>
+<li><a href="testnets/../user-guide/ledger/masp.html">MASP (multi-asset shielded pool) transfers</a> - make private transfers of any Namada token</li>
+</ul>
+<p>Future testnets will include more features as described in <a href="https://specs.anoma.net/master/architecture/namada.html">the Namada spec</a>, like IBC (inter-blockchain communication protocol), bridging to the Ethereum blockchain and more.</p>
+<h2 id="status"><a class="header" href="#status">Status</a></h2>
+<ul>
+<li>2021-05-02 - we are currently preparing to launch the chain. Applications are open for people to be genesis validators.</li>
+</ul>
+<h2 id="chain-information"><a class="header" href="#chain-information">Chain information</a></h2>
+<p>Chain ID: TBD</p>
+<p>You will need to compile the binaries from source yourself, make sure you have checked out the specific commit <code>f1afdffd5e43ad4bb448db7bf5bc1e23464350f7</code> to build from, then follow <a href="testnets/../user-guide/install.html#from-source">the building from source guide</a>.</p>
+<h2 id="applying-to-be-a-genesis-validator"><a class="header" href="#applying-to-be-a-genesis-validator">Applying to be a genesis validator</a></h2>
+<h3 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h3>
+<ul>
+<li>a machine that meets the <a href="testnets/../user-guide/install.html#hardware-requirements">requirements</a> for running a validator node</li>
+<li>an associated public IPv4 address with ports 26656 reachable from anywhere for P2P connections</li>
+</ul>
+<h3 id="set-up"><a class="header" href="#set-up">Set up</a></h3>
+<p>Follow <a href="testnets/../user-guide/genesis-validator-setup.html#pre-genesis">this guide</a> on how to generate your &quot;pre-genesis&quot; validator files.</p>
+<p>After this, you'll have a <code>validator.toml</code> file, the contents of which will look something like the following:</p>
+<pre><code class="language-toml">[validator.1337-validator]
+consensus_public_key = &quot;00056fff5232da385d88428ca2bb2012a4d83cdf5c697864dde34b393333a72268&quot;
+account_public_key = &quot;00f1bd321be2e23b9503653dd50fcd5177ca43a0ade6da60108eaecde0d68abdc8&quot;
+staking_reward_public_key = &quot;005725f952115838590fc7c5dd9590bc054ac4bd5af55672a40df4ac7dca50ce97&quot;
+protocol_public_key = &quot;0054c213d2f8fe2dd3fc5a41a52fd2839cb49643d960d7f75e993202692c5d8783&quot;
+dkg_public_key = &quot;6000000054eafa7320ddebf00c9487e5f7ea5107a8444f042b74caf9ed5679163f854577bf4d0992a8fd301ec4f3438c9934c617a2c71649178e536f7e2a8cdc1f8331139b7fd9b4d36861f0a9915d83f61d7f969219f0eba95bb6fa45595425923d4c0e&quot;
+net_address = &quot;1.2.3.4:26656&quot;
+tendermint_node_key = &quot;00e1a8fe1abceb700063ab4558baec680b64247e2fd9891962af552b9e49318d8d&quot;
+</code></pre>
+<p>This file contains only public information and is safe to share publicly. If you want to be a genesis validator for this testnet, please make a pull request to <a href="https://github.com/anoma/namada-testnets">https://github.com/anoma/namada-testnets</a> adding your <code>validator.toml</code> file to the <code>namada-close-quarters-testnet-1/</code> directory, renaming it to <code>$alias.toml</code>. e.g. if you chose your alias to be &quot;bertha&quot;, submit the file with the name <code>bertha.toml</code>. You can see what an example PR looks like <a href="https://github.com/anoma/namada-testnets/pull/1">here</a>.</p>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/testnets/namada-close-quarters-testnet-1.md">Edit this file on GitHub.</a></footer>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
