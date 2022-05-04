@@ -25,3 +25,4 @@ renderer = ["html"]
 
 [preprocessor.admonish]
 command = "mdbook-admonish"
+on_failure = "bail"
