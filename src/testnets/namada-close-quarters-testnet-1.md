@@ -13,7 +13,7 @@ Future testnets will include more features as described in [the Namada spec](htt
 
 ## Chain information
 
-Chain ID: TBD
+Chain ID: `namada-cq-1.9c81b94e47e462ce8c`
 
 You will need to compile the binaries from source yourself, make sure you have checked out the specific commit `f1afdffd5e43ad4bb448db7bf5bc1e23464350f7` to build from, then follow [the building from source guide](../user-guide/install.md#from-source).
 
