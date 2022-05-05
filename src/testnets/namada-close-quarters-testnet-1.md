@@ -9,7 +9,8 @@ Future testnets will include more features as described in [the Namada spec](htt
 
 ## Status
 
-- 2021-05-02 - we are currently preparing to launch the chain. Applications are open for people to be genesis validators.
+- 2022-05-05: The chain has been setup to start today at 12:00 CET.
+- 2022-05-02: We are currently preparing to launch the chain. Applications are open for people to be genesis validators.
 
 ## Chain information
 
