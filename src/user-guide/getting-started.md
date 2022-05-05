@@ -15,8 +15,6 @@ The main binary `anoma` has sub-commands for all of the other binaries:
 
 To explore the command-line interface, add `--help` argument at any sub-command level to find out any possible sub-commands and/or arguments.
 
-To configure your node to join the testnet, run:
+## Joining a testnet
 
-```shell
-anoma client utils join-network --chain-id=anoma-testnet-1.2.bf0181d9f7e0
-```
+Before most commands will work, you will need to join a testnet with the `anoma client utils join-network` command and the chain ID of a live network. See the [testnets](../testnets) section for details of how to do this.
