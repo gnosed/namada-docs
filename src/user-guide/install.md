@@ -35,7 +35,7 @@ Then, install the remaining dependencies.
 **Ubuntu:** running the following command should install everything needed:
 
 ```shell
-sudo apt-get install -y make git-core libssl-dev pkg-config libclang-12-dev
+sudo apt-get install -y make git-core libssl-dev pkg-config libclang-12-dev build-essential
 ```
 
 **Mac:** installing the Xcode command line tools should provide you with almost everything you need:
