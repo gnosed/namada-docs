@@ -9,11 +9,12 @@ Future testnets will include more features as described in [the Namada spec](htt
 
 ## Status
 
-- 2021-05-02 - we are currently preparing to launch the chain. Applications are open for people to be genesis validators.
+- 2022-05-05: The chain has been setup to start today at 12:00 CET.
+- 2022-05-02: We are currently preparing to launch the chain. Applications are open for people to be genesis validators.
 
 ## Chain information
 
-Chain ID: TBD
+Chain ID: `namada-cq-1.9c81b94e47e462ce8c`
 
 You will need to compile the binaries from source yourself, make sure you have checked out the specific commit `f1afdffd5e43ad4bb448db7bf5bc1e23464350f7` to build from, then follow [the building from source guide](../user-guide/install.md#from-source).
 
