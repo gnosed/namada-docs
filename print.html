@@ -157,11 +157,6 @@
 <li><a href="https://anoma.network/papers/whitepaper.pdf">Anoma's Whitepaper</a></li>
 <li><a href="https://anoma.network/papers/vision-paper.pdf">Anoma's Vision paper</a></li>
 </ul>
-<h3 id="anomas-current-testnet-feigenbaum"><a class="header" href="#anomas-current-testnet-feigenbaum">Anoma's current testnet: Feigenbaum</a></h3>
-<p>Feigenbaum is the name of Anoma's first public testnet. Find <code>feigenbaum</code> on <a href="https://github.com/anoma/anoma/releases">Github</a>.</p>
-<blockquote>
-<p>⚠️ Here lay dragons: this codebase is still experimental, try at your own risk!</p>
-</blockquote>
 <h3 id="the-source"><a class="header" href="#the-source">The source</a></h3>
 <p>This book is written using <a href="https://rust-lang.github.io/mdBook/">mdBook</a>, it currently lives in the <a href="https://github.com/anoma/docs">Anoma docs repo</a>.</p>
 <p>To get started quickly, in the <code>docs</code> directory one can:</p>
@@ -172,56 +167,26 @@ make dev-deps
 make serve
 </code></pre>
 <p><a href="https://github.com/anoma/docs/issues">Contributions</a> to the contents and the structure of this book should be made via pull requests.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="quick-start---how-to-install-anoma-and-run-a-validator-node"><a class="header" href="#quick-start---how-to-install-anoma-and-run-a-validator-node">Quick Start - How to install Anoma and run a validator node</a></h1>
-<h2 id="requirements"><a class="header" href="#requirements">Requirements</a></h2>
-<ul>
-<li>Building from source requires at least 16GB of ram available and 4 core cpu,</li>
-<li>Free disk space of at least 60GB,</li>
-<li>Intel i3 or better will suffice.</li>
-<li>Tendermint 0.34.x pre-installed</li>
-</ul>
-<p>To install the correct version of Tendermint, download any of the pre-built binaries for versions 0.34.x <a href="https://github.com/tendermint/tendermint/releases">here</a> and install it using the instructions on the <a href="https://docs.tendermint.com/master/introduction/install.html">Tendermint guide</a>, or use a script on the Anoma repo
-<code>scripts/install/get_tendermint.sh</code> This is used by the <code>make install</code> command (if you’re installing from the source).</p>
-<p>At the moment we are not supporting windows.</p>
-<p>This guide also assumes that the user has a basic knowledge of the terminal and how commands are used.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="quick-start---how-to-run-a-validator-node"><a class="header" href="#quick-start---how-to-run-a-validator-node">Quick Start - How to run a validator node</a></h1>
 <h2 id="about-this-guide"><a class="header" href="#about-this-guide">About this guide</a></h2>
+<p>This guide is aimed at people interested in running a validator node and assumes basic knowledge of the terminal and how commands are used.</p>
 <ul>
-<li>Commands start with <code>$</code>:<br />
-<code>$ this is a command do not copy the dollar sign!</code></li>
 <li>Comments start with <code>#</code>:<br />
 <code># this is a comment make sure you read them!</code></li>
 <li>Sample outputs start with an arrow:<br />
 <code>➜ this is an example command line output useful for comparing</code></li>
 </ul>
 <h2 id="install-anoma"><a class="header" href="#install-anoma">Install Anoma</a></h2>
-<p>To pull the latest Anoma executables on Linux (at time of writing, this is <a href="https://github.com/anoma/anoma/releases/tag/v0.3.1">Anoma v.0.3.1</a>):</p>
-<pre><code class="language-shell">$ curl -LO https://github.com/anoma/anoma/releases/download/v0.3.1/anoma-v0.3.1-Linux-x86_64.tar.gz
-
-➜ 2022-01-06 22:13:01 (12.0 MB/s) - 'anoma-v0.3.1-Linux-x86_64.tar.gz' saved [25169169/25169169]
-</code></pre>
-<p>or on Mac:</p>
-<pre><code class="language-shell">curl -LO https://github.com/anoma/anoma/releases/download/v0.3.1/anoma-v0.3.1-Darwin-x86_64.tar.gz 
-</code></pre>
-<p>Extract them with:</p>
-<pre><code class="language-shell">tar -x -z -f anoma-v0.3.1-[platform].tar.gz
-</code></pre>
-<p>and change directory with:</p>
-<p><code>$ cd anoma-v0.3.1-[platform]</code></p>
-<p>Remember to replace <code>[platform]</code> with your platform (without brackets). This could be 'Linux-x86_64' for Linux or 'Darwin-x86_64' for Mac.</p>
-<h2 id="configure"><a class="header" href="#configure">Configure</a></h2>
-<p>Still in the same directory as above</p>
-<pre><code class="language-shell">$ ./anomac utils join-network --chain-id=anoma-testnet-1.2.bf0181d9f7e0
-
-➜ Downloading config release from https://github.com/heliaxdev/anoma-network-config/releases/download/anoma-testnet-1.2.bf0181d9f7e0/anoma-testnet-1.2.bf0181d9f7e0.tar.gz ...
-➜ Successfully configured for chain ID anoma-testnet-1.2.bf0181d9f7e0
-</code></pre>
-<h2 id="run"><a class="header" href="#run">Run</a></h2>
+<p>See <a href="user-guide/install.html">the install guide</a> for details on installing the Anoma binaries. Commands in this guide will assume you have the Anoma binaries (<code>anoma</code>, <code>anoman</code>, <code>anomaw</code>, <code>anomac</code>) on your path.</p>
+<h2 id="joining-a-network"><a class="header" href="#joining-a-network">Joining a network</a></h2>
+<p>See <a href="testnets">the testnets page</a> for details of how to join a testnet. The rest of this guide will assume you have joined a testnet chain using the <code>anomac utils join-network</code> command.</p>
+<h2 id="run-a-ledger-node"><a class="header" href="#run-a-ledger-node">Run a ledger node</a></h2>
 <p>We recommend this step with tmux, as you can keep the node running without needing the terminal open permanently. If not, skip to the subsequent step.</p>
-<pre><code class="language-shell">$ tmux
+<pre><code class="language-shell">tmux
 
 # inside the tmux/or not
 
-$ ./anoma ledger
+anoma ledger
 
 # can detach the tmux (Ctrl-B then D)
 </code></pre>
@@ -231,7 +196,8 @@ $ ./anoma ledger
 <pre><code class="language-shell"># first, we make a keypair and the implicit account associated with it
 # anomaw address gen instead of key gen. Preferred because they both make a keypair but the former stores the implicit address for it too 
 
-$ ./anomaw address gen --alias example-implicit
+anomaw address gen \
+  --alias example-implicit
 
 ➜ Enter encryption password: 
 Successfully added a key and an address with alias: &quot;example-implicit&quot;
@@ -239,7 +205,10 @@ Successfully added a key and an address with alias: &quot;example-implicit&quot;
 # use it to make an established account
 </code></pre>
 <p>To initialize an account operator on chain under the alias &quot;example-established&quot;:</p>
-<pre><code class="language-shell">$ ./anomac init-account --source example-implicit --public-key example-implicit --alias example-established
+<pre><code class="language-shell">anomac init-account \
+  --source example-implicit \
+  --public-key example-implicit \
+  --alias example-established
 
 ➜ Jan 06 22:22:19.864  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Enter decryption password: 
@@ -259,7 +228,12 @@ The transaction initialized 1 new account
 ➜ Added alias example-established for address atest1v4ehgw36ggmyzwp5g9prgsekgsu5y32z8ycnsvpeggcnys35gv65yvzxg3zrjwphgcu5gde4lvmstw
 </code></pre>
 <p>Let's transfer ourselves 1000 XAN from the faucet with the same alias using:</p>
-<pre><code class="language-shell">$ ./anomac transfer --source faucet --target example-established --token XAN --amount 1000 --signer example-established
+<pre><code class="language-shell">anomac transfer \
+  --source faucet \
+  --target example-established \
+  --token XAN \
+  --amount 1000 \
+  --signer example-established
 
 ➜ Jan 06 22:24:32.926  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 ➜ Looking-up public key of atest1v4ehgw36ggmyzwp5g9prgsekgsu5y32z8ycnsvpeggcnys35gv65yvzxg3zrjwphgcu5gde4lvmstw from the ledger...
@@ -276,11 +250,14 @@ Transaction applied with result: {
 }
 </code></pre>
 <p>To get the balance of your account &quot;example-established&quot;:</p>
-<pre><code class="language-shell">./anomac balance --owner example-established
+<pre><code class="language-shell">anomac balance \
+  --owner example-established
 </code></pre>
 <h2 id="setting-up-the-validator-node"><a class="header" href="#setting-up-the-validator-node">Setting up the validator node</a></h2>
 <p>Initialize a validator account under any alias - in this example, &quot;example-validator&quot;:</p>
-<pre><code class="language-shell">$ ./anomac init-validator --alias example-validator --source example-established
+<pre><code class="language-shell">anomac init-validator \
+  --alias example-validator \
+  --source example-established
 
 ➜  Jan 06 22:26:29.927  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Generating validator account key...
@@ -313,7 +290,11 @@ The ledger node has been setup to use this validator's address and consensus key
 <p>When you restart the node, you might notice log message &quot;This node is not a validator&quot; from Tendermint. This is expected, because your validator doesn't yet have any stake in the <a href="./user-guide/ledger/pos.html">PoS system</a>.</p>
 <p>We will now add some stake to your validator account.</p>
 <p>Transfer 1000 XAN to your validator account (&quot;example-validator&quot;):</p>
-<pre><code class="language-shell">$ ./anomac transfer --source example-established --target example-validator --token XAN --amount 1000
+<pre><code class="language-shell">anomac transfer \
+  --source example-established \
+  --target example-validator \
+  --token XAN \
+  --amount 1000
 
 ➜  Jan 06 22:28:17.624  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Looking-up public key of atest1v4ehgw36ggmyzwp5g9prgsekgsu5y32z8ycnsvpeggcnys35gv65yvzxg3zrjwphgcu5gde4lvmstw from the ledger...
@@ -330,7 +311,9 @@ Transaction applied with result: {
 }
 </code></pre>
 <p>Bond the 1000 XAN to &quot;example-validator&quot; using:</p>
-<pre><code class="language-shell">$ ./anomac bond --validator example-validator --amount 1000
+<pre><code class="language-shell">anomac bond \
+  --validator example-validator \
+  --amount 1000
 
 ➜ Jan 06 22:29:08.903  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Looking-up public key of atest1v4ehgw36g3prx3pjxapyvve3xvury3fkxg6nqsesxccnzw2rxdryg335xcmnysjzxdzyvd2pamfmwd from the ledger...
@@ -347,7 +330,8 @@ Transaction applied with result: {
 }
 </code></pre>
 <p>Check your bond:</p>
-<pre><code class="language-shell">$ ./anomac bonds --validator example-validator
+<pre><code class="language-shell">anomac bonds \
+  --validator example-validator
 
 ➜ Jan 06 22:30:42.798  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Last committed epoch: 22394
@@ -356,7 +340,8 @@ Self-bonds:
 Bonds total: 1000
 </code></pre>
 <p>Check the voting power - this will be 0 until the active-from epoch is reached (in this case <code>22395</code>):</p>
-<pre><code class="language-shell">$ ./anomac voting-power --validator example-validator
+<pre><code class="language-shell">anomac voting-power \
+  --validator example-validator
 
 ➜ Jan 06 22:31:24.908  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Last committed epoch: 22395
@@ -457,9 +442,8 @@ nix run github:anoma/anoma/&lt;revision&gt;
 <li><code>anoma wallet = anomaw</code></li>
 </ul>
 <p>To explore the command-line interface, add <code>--help</code> argument at any sub-command level to find out any possible sub-commands and/or arguments.</p>
-<p>To configure your node to join the testnet, run:</p>
-<pre><code class="language-shell">anoma client utils join-network --chain-id=anoma-testnet-1.2.bf0181d9f7e0
-</code></pre>
+<h2 id="joining-a-testnet"><a class="header" href="#joining-a-testnet">Joining a testnet</a></h2>
+<p>Before most commands will work, you will need to join a testnet with the <code>anoma client utils join-network</code> command and the chain ID of a live network. See the <a href="user-guide/../testnets">testnets</a> section for details of how to do this.</p>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/user-guide/getting-started.md">Edit this file on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="the-anoma-wallet"><a class="header" href="#the-anoma-wallet">The Anoma Wallet</a></h1>
 <p>The Anoma wallet allows you to store and use addresses and keys by their alias.</p>
 <p>The wallet's state is stored under <code>.anoma/{chain_id}/wallet.toml</code> (with the default <code>--base-dir</code>), which will be created for you if it doesn't already exist when you run any command that accesses the wallet. A newly created wallet will be pre-loaded with some default addresses.</p>
@@ -966,8 +950,13 @@ anoma client utils init-genesis-validator \
 </ul>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/user-guide/genesis-validator-setup.md">Edit this file on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="testnets"><a class="header" href="#testnets">Testnets</a></h1>
 <p>This section describes how to connect to the various testnets and to test selected features.</p>
+<p>You may need to be using <code>anoma</code> binaries built from a specific commit in order to interact with specific testnets. Use the below command with the chain ID of the testnet you want to join.</p>
+<pre><code class="language-shell">anoma client utils join-network --chain-id=$ANOMA_CHAIN_ID
+</code></pre>
+<h2 id="current-testnets"><a class="header" href="#current-testnets">Current testnets</a></h2>
 <ul>
-<li>Connect to <a href="testnets/internal-testnet-1.html">Internal Testnet 1</a> and try MASP commands</li>
+<li><a href="testnets/namada-close-quarters-testnet-1.html">Namada Close Quarters Testnet 1</a></li>
+<li><a href="testnets/gov-masp-devnet-1.html">Gov MASP Devnet 1</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="namada-close-quarters-testnet-1"><a class="header" href="#namada-close-quarters-testnet-1">Namada Close Quarters Testnet 1</a></h1>
 <p>This testnet introduces the following new features:</p>
@@ -976,14 +965,17 @@ anoma client utils init-genesis-validator \
 <li><a href="testnets/../user-guide/ledger/masp.html">MASP (multi-asset shielded pool) transfers</a> - make private transfers of any Namada token</li>
 </ul>
 <p>Future testnets will include more features as described in <a href="https://specs.anoma.net/master/architecture/namada.html">the Namada spec</a>, like IBC (inter-blockchain communication protocol), bridging to the Ethereum blockchain and more.</p>
+<h2 id="chain-information"><a class="header" href="#chain-information">Chain information</a></h2>
+<p>Latest values regarding the testnet that would be useful to have in your shell:</p>
+<pre><code class="language-shell">export ANOMA_CHAIN_ID='namada-cq-1.648898db560684647c'
+export ANOMA_COMMIT='f1afdffd5e43ad4bb448db7bf5bc1e23464350f7'
+</code></pre>
+<p>You will need to compile the binaries from source yourself, make sure you have checked out the specific commit <code>$ANOMA_COMMIT</code> to build from, then follow <a href="testnets/../user-guide/install.html#from-source">the building from source guide</a>.</p>
 <h2 id="status"><a class="header" href="#status">Status</a></h2>
 <ul>
 <li>2022-05-05: The chain has been setup to start today at 12:00 CET.</li>
 <li>2022-05-02: We are currently preparing to launch the chain. Applications are open for people to be genesis validators.</li>
 </ul>
-<h2 id="chain-information"><a class="header" href="#chain-information">Chain information</a></h2>
-<p>Chain ID: <code>namada-cq-1.648898db560684647c</code></p>
-<p>You will need to compile the binaries from source yourself, make sure you have checked out the specific commit <code>f1afdffd5e43ad4bb448db7bf5bc1e23464350f7</code> to build from, then follow <a href="testnets/../user-guide/install.html#from-source">the building from source guide</a>.</p>
 <h2 id="applying-to-be-a-genesis-validator"><a class="header" href="#applying-to-be-a-genesis-validator">Applying to be a genesis validator</a></h2>
 <h3 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h3>
 <ul>
@@ -1009,11 +1001,12 @@ tendermint_node_key = &quot;00e1a8fe1abceb700063ab4558baec680b64247e2fd9891962af
 <li><a href="testnets/../user-guide/ledger/governance.html">on-chain governance</a> - create and vote for proposals both onchain and offchain</li>
 <li><a href="testnets/../user-guide/ledger/masp.html">MASP (multi-asset shielded pool) transfers</a> - make private transfers of any Namada token</li>
 </ul>
+<h2 id="chain-information-1"><a class="header" href="#chain-information-1">Chain information</a></h2>
 <p>Latest values regarding the testnet that would be useful to have in your shell:</p>
-<pre><code class="language-shell">export ANOMA_TESTNET_CHAIN_ID='anoma-gov-masp.3f1b25f2ee35b2e'
-export ANOMA_TESTNET_COMMIT='f1afdffd5e43ad4bb448db7bf5bc1e23464350f7'
+<pre><code class="language-shell">export ANOMA_CHAIN_ID='anoma-gov-masp.3f1b25f2ee35b2e'
+export ANOMA_COMMIT='f1afdffd5e43ad4bb448db7bf5bc1e23464350f7'
 </code></pre>
-<p>You can install Namada by following the instructions from the <a href="testnets/../user-guide/install.html">Install User Guide</a>. Note that the binaries should be built from <code>$ANOMA_TESTNET_COMMIT</code> rather than <code>master</code> or a release tag like <code>v0.5.0</code>.</p>
+<p>You can install Namada by following the instructions from the <a href="testnets/../user-guide/install.html">Install User Guide</a>. Note that the binaries should be built from <code>$ANOMA_COMMIT</code> rather than <code>master</code> or a release tag like <code>v0.5.0</code>.</p>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/anoma/docs/edit/main/src/testnets/gov-masp-devnet-1.md">Edit this file on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="archive"><a class="header" href="#archive">Archive</a></h1>
 <p>The archive contains deprecated pages.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="internal-testnet-1"><a class="header" href="#internal-testnet-1">Internal Testnet 1</a></h1>

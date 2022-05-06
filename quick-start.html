@@ -150,56 +150,26 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="quick-start---how-to-install-anoma-and-run-a-validator-node"><a class="header" href="#quick-start---how-to-install-anoma-and-run-a-validator-node">Quick Start - How to install Anoma and run a validator node</a></h1>
-<h2 id="requirements"><a class="header" href="#requirements">Requirements</a></h2>
-<ul>
-<li>Building from source requires at least 16GB of ram available and 4 core cpu,</li>
-<li>Free disk space of at least 60GB,</li>
-<li>Intel i3 or better will suffice.</li>
-<li>Tendermint 0.34.x pre-installed</li>
-</ul>
-<p>To install the correct version of Tendermint, download any of the pre-built binaries for versions 0.34.x <a href="https://github.com/tendermint/tendermint/releases">here</a> and install it using the instructions on the <a href="https://docs.tendermint.com/master/introduction/install.html">Tendermint guide</a>, or use a script on the Anoma repo
-<code>scripts/install/get_tendermint.sh</code> This is used by the <code>make install</code> command (if you’re installing from the source).</p>
-<p>At the moment we are not supporting windows.</p>
-<p>This guide also assumes that the user has a basic knowledge of the terminal and how commands are used.</p>
+                        <h1 id="quick-start---how-to-run-a-validator-node"><a class="header" href="#quick-start---how-to-run-a-validator-node">Quick Start - How to run a validator node</a></h1>
 <h2 id="about-this-guide"><a class="header" href="#about-this-guide">About this guide</a></h2>
+<p>This guide is aimed at people interested in running a validator node and assumes basic knowledge of the terminal and how commands are used.</p>
 <ul>
-<li>Commands start with <code>$</code>:<br />
-<code>$ this is a command do not copy the dollar sign!</code></li>
 <li>Comments start with <code>#</code>:<br />
 <code># this is a comment make sure you read them!</code></li>
 <li>Sample outputs start with an arrow:<br />
 <code>➜ this is an example command line output useful for comparing</code></li>
 </ul>
 <h2 id="install-anoma"><a class="header" href="#install-anoma">Install Anoma</a></h2>
-<p>To pull the latest Anoma executables on Linux (at time of writing, this is <a href="https://github.com/anoma/anoma/releases/tag/v0.3.1">Anoma v.0.3.1</a>):</p>
-<pre><code class="language-shell">$ curl -LO https://github.com/anoma/anoma/releases/download/v0.3.1/anoma-v0.3.1-Linux-x86_64.tar.gz
-
-➜ 2022-01-06 22:13:01 (12.0 MB/s) - 'anoma-v0.3.1-Linux-x86_64.tar.gz' saved [25169169/25169169]
-</code></pre>
-<p>or on Mac:</p>
-<pre><code class="language-shell">curl -LO https://github.com/anoma/anoma/releases/download/v0.3.1/anoma-v0.3.1-Darwin-x86_64.tar.gz 
-</code></pre>
-<p>Extract them with:</p>
-<pre><code class="language-shell">tar -x -z -f anoma-v0.3.1-[platform].tar.gz
-</code></pre>
-<p>and change directory with:</p>
-<p><code>$ cd anoma-v0.3.1-[platform]</code></p>
-<p>Remember to replace <code>[platform]</code> with your platform (without brackets). This could be 'Linux-x86_64' for Linux or 'Darwin-x86_64' for Mac.</p>
-<h2 id="configure"><a class="header" href="#configure">Configure</a></h2>
-<p>Still in the same directory as above</p>
-<pre><code class="language-shell">$ ./anomac utils join-network --chain-id=anoma-testnet-1.2.bf0181d9f7e0
-
-➜ Downloading config release from https://github.com/heliaxdev/anoma-network-config/releases/download/anoma-testnet-1.2.bf0181d9f7e0/anoma-testnet-1.2.bf0181d9f7e0.tar.gz ...
-➜ Successfully configured for chain ID anoma-testnet-1.2.bf0181d9f7e0
-</code></pre>
-<h2 id="run"><a class="header" href="#run">Run</a></h2>
+<p>See <a href="user-guide/install.html">the install guide</a> for details on installing the Anoma binaries. Commands in this guide will assume you have the Anoma binaries (<code>anoma</code>, <code>anoman</code>, <code>anomaw</code>, <code>anomac</code>) on your path.</p>
+<h2 id="joining-a-network"><a class="header" href="#joining-a-network">Joining a network</a></h2>
+<p>See <a href="testnets">the testnets page</a> for details of how to join a testnet. The rest of this guide will assume you have joined a testnet chain using the <code>anomac utils join-network</code> command.</p>
+<h2 id="run-a-ledger-node"><a class="header" href="#run-a-ledger-node">Run a ledger node</a></h2>
 <p>We recommend this step with tmux, as you can keep the node running without needing the terminal open permanently. If not, skip to the subsequent step.</p>
-<pre><code class="language-shell">$ tmux
+<pre><code class="language-shell">tmux
 
 # inside the tmux/or not
 
-$ ./anoma ledger
+anoma ledger
 
 # can detach the tmux (Ctrl-B then D)
 </code></pre>
@@ -209,7 +179,8 @@ $ ./anoma ledger
 <pre><code class="language-shell"># first, we make a keypair and the implicit account associated with it
 # anomaw address gen instead of key gen. Preferred because they both make a keypair but the former stores the implicit address for it too 
 
-$ ./anomaw address gen --alias example-implicit
+anomaw address gen \
+  --alias example-implicit
 
 ➜ Enter encryption password: 
 Successfully added a key and an address with alias: &quot;example-implicit&quot;
@@ -217,7 +188,10 @@ Successfully added a key and an address with alias: &quot;example-implicit&quot;
 # use it to make an established account
 </code></pre>
 <p>To initialize an account operator on chain under the alias &quot;example-established&quot;:</p>
-<pre><code class="language-shell">$ ./anomac init-account --source example-implicit --public-key example-implicit --alias example-established
+<pre><code class="language-shell">anomac init-account \
+  --source example-implicit \
+  --public-key example-implicit \
+  --alias example-established
 
 ➜ Jan 06 22:22:19.864  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Enter decryption password: 
@@ -237,7 +211,12 @@ The transaction initialized 1 new account
 ➜ Added alias example-established for address atest1v4ehgw36ggmyzwp5g9prgsekgsu5y32z8ycnsvpeggcnys35gv65yvzxg3zrjwphgcu5gde4lvmstw
 </code></pre>
 <p>Let's transfer ourselves 1000 XAN from the faucet with the same alias using:</p>
-<pre><code class="language-shell">$ ./anomac transfer --source faucet --target example-established --token XAN --amount 1000 --signer example-established
+<pre><code class="language-shell">anomac transfer \
+  --source faucet \
+  --target example-established \
+  --token XAN \
+  --amount 1000 \
+  --signer example-established
 
 ➜ Jan 06 22:24:32.926  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 ➜ Looking-up public key of atest1v4ehgw36ggmyzwp5g9prgsekgsu5y32z8ycnsvpeggcnys35gv65yvzxg3zrjwphgcu5gde4lvmstw from the ledger...
@@ -254,11 +233,14 @@ Transaction applied with result: {
 }
 </code></pre>
 <p>To get the balance of your account &quot;example-established&quot;:</p>
-<pre><code class="language-shell">./anomac balance --owner example-established
+<pre><code class="language-shell">anomac balance \
+  --owner example-established
 </code></pre>
 <h2 id="setting-up-the-validator-node"><a class="header" href="#setting-up-the-validator-node">Setting up the validator node</a></h2>
 <p>Initialize a validator account under any alias - in this example, &quot;example-validator&quot;:</p>
-<pre><code class="language-shell">$ ./anomac init-validator --alias example-validator --source example-established
+<pre><code class="language-shell">anomac init-validator \
+  --alias example-validator \
+  --source example-established
 
 ➜  Jan 06 22:26:29.927  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Generating validator account key...
@@ -291,7 +273,11 @@ The ledger node has been setup to use this validator's address and consensus key
 <p>When you restart the node, you might notice log message &quot;This node is not a validator&quot; from Tendermint. This is expected, because your validator doesn't yet have any stake in the <a href="./user-guide/ledger/pos.html">PoS system</a>.</p>
 <p>We will now add some stake to your validator account.</p>
 <p>Transfer 1000 XAN to your validator account (&quot;example-validator&quot;):</p>
-<pre><code class="language-shell">$ ./anomac transfer --source example-established --target example-validator --token XAN --amount 1000
+<pre><code class="language-shell">anomac transfer \
+  --source example-established \
+  --target example-validator \
+  --token XAN \
+  --amount 1000
 
 ➜  Jan 06 22:28:17.624  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Looking-up public key of atest1v4ehgw36ggmyzwp5g9prgsekgsu5y32z8ycnsvpeggcnys35gv65yvzxg3zrjwphgcu5gde4lvmstw from the ledger...
@@ -308,7 +294,9 @@ Transaction applied with result: {
 }
 </code></pre>
 <p>Bond the 1000 XAN to &quot;example-validator&quot; using:</p>
-<pre><code class="language-shell">$ ./anomac bond --validator example-validator --amount 1000
+<pre><code class="language-shell">anomac bond \
+  --validator example-validator \
+  --amount 1000
 
 ➜ Jan 06 22:29:08.903  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Looking-up public key of atest1v4ehgw36g3prx3pjxapyvve3xvury3fkxg6nqsesxccnzw2rxdryg335xcmnysjzxdzyvd2pamfmwd from the ledger...
@@ -325,7 +313,8 @@ Transaction applied with result: {
 }
 </code></pre>
 <p>Check your bond:</p>
-<pre><code class="language-shell">$ ./anomac bonds --validator example-validator
+<pre><code class="language-shell">anomac bonds \
+  --validator example-validator
 
 ➜ Jan 06 22:30:42.798  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Last committed epoch: 22394
@@ -334,7 +323,8 @@ Self-bonds:
 Bonds total: 1000
 </code></pre>
 <p>Check the voting power - this will be 0 until the active-from epoch is reached (in this case <code>22395</code>):</p>
-<pre><code class="language-shell">$ ./anomac voting-power --validator example-validator
+<pre><code class="language-shell">anomac voting-power \
+  --validator example-validator
 
 ➜ Jan 06 22:31:24.908  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Last committed epoch: 22395
