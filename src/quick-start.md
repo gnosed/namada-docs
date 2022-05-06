@@ -4,8 +4,6 @@
 
 This guide is aimed at people interested in running a validator node and assumes basic knowledge of the terminal and how commands are used.
 
-* Commands start with `$`:  
-  `$ this is a command do not copy the dollar sign!`
 * Comments start with `#`:  
   `# this is a comment make sure you read them!`
 * Sample outputs start with an arrow:  
@@ -24,11 +22,11 @@ See [the testnets page](testnets) for details of how to join a testnet. The rest
 We recommend this step with tmux, as you can keep the node running without needing the terminal open permanently. If not, skip to the subsequent step.
 
 ```shell
-$ tmux
+tmux
 
 # inside the tmux/or not
 
-$ anoma ledger
+anoma ledger
 
 # can detach the tmux (Ctrl-B then D)
 ```
@@ -43,7 +41,7 @@ Generate a local key on disk
 # first, we make a keypair and the implicit account associated with it
 # anomaw address gen instead of key gen. Preferred because they both make a keypair but the former stores the implicit address for it too 
 
-$ anomaw address gen --alias example-implicit
+anomaw address gen --alias example-implicit
 
 ➜ Enter encryption password: 
 Successfully added a key and an address with alias: "example-implicit"
@@ -54,7 +52,7 @@ Successfully added a key and an address with alias: "example-implicit"
 To initialize an account operator on chain under the alias "example-established":
 
 ```shell
-$ anomac init-account --source example-implicit --public-key example-implicit --alias example-established
+anomac init-account --source example-implicit --public-key example-implicit --alias example-established
 
 ➜ Jan 06 22:22:19.864  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Enter decryption password: 
@@ -77,7 +75,7 @@ The transaction initialized 1 new account
 Let's transfer ourselves 1000 XAN from the faucet with the same alias using:
 
 ```shell
-$ anomac transfer --source faucet --target example-established --token XAN --amount 1000 --signer example-established
+anomac transfer --source faucet --target example-established --token XAN --amount 1000 --signer example-established
 
 ➜ Jan 06 22:24:32.926  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 ➜ Looking-up public key of atest1v4ehgw36ggmyzwp5g9prgsekgsu5y32z8ycnsvpeggcnys35gv65yvzxg3zrjwphgcu5gde4lvmstw from the ledger...
@@ -105,7 +103,7 @@ anomac balance --owner example-established
 Initialize a validator account under any alias - in this example, "example-validator":
 
 ```shell
-$ anomac init-validator --alias example-validator --source example-established
+anomac init-validator --alias example-validator --source example-established
 
 ➜  Jan 06 22:26:29.927  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Generating validator account key...
@@ -147,7 +145,7 @@ We will now add some stake to your validator account.
 Transfer 1000 XAN to your validator account ("example-validator"):
 
 ```shell
-$ anomac transfer --source example-established --target example-validator --token XAN --amount 1000
+anomac transfer --source example-established --target example-validator --token XAN --amount 1000
 
 ➜  Jan 06 22:28:17.624  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Looking-up public key of atest1v4ehgw36ggmyzwp5g9prgsekgsu5y32z8ycnsvpeggcnys35gv65yvzxg3zrjwphgcu5gde4lvmstw from the ledger...
@@ -167,7 +165,7 @@ Transaction applied with result: {
 Bond the 1000 XAN to "example-validator" using:
 
 ```shell
-$ anomac bond --validator example-validator --amount 1000
+anomac bond --validator example-validator --amount 1000
 
 ➜ Jan 06 22:29:08.903  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Looking-up public key of atest1v4ehgw36g3prx3pjxapyvve3xvury3fkxg6nqsesxccnzw2rxdryg335xcmnysjzxdzyvd2pamfmwd from the ledger...
@@ -187,7 +185,7 @@ Transaction applied with result: {
 Check your bond:
 
 ```shell
-$ anomac bonds --validator example-validator
+anomac bonds --validator example-validator
 
 ➜ Jan 06 22:30:42.798  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Last committed epoch: 22394
@@ -199,7 +197,7 @@ Bonds total: 1000
 Check the voting power - this will be 0 until the active-from epoch is reached (in this case `22395`):
 
 ```shell
-$ anomac voting-power --validator example-validator
+anomac voting-power --validator example-validator
 
 ➜ Jan 06 22:31:24.908  INFO anoma_apps::cli::context: Chain ID: anoma-testnet-1.2.bf0181d9f7e0
 Last committed epoch: 22395
