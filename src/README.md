@@ -10,12 +10,6 @@ Welcome to Anoma's docs!
 - [Anoma's Whitepaper](https://anoma.network/papers/whitepaper.pdf)
 - [Anoma's Vision paper](https://anoma.network/papers/vision-paper.pdf)
 
-### Anoma's current testnet: Feigenbaum
-
-Feigenbaum is the name of Anoma's first public testnet. Find `feigenbaum` on [Github](https://github.com/anoma/anoma/releases).
-
-> ⚠️ Here lay dragons: this codebase is still experimental, try at your own risk!
-
 ### The source
 
 This book is written using [mdBook](https://rust-lang.github.io/mdBook/), it currently lives in the [Anoma docs repo](https://github.com/anoma/docs).
