@@ -1,16 +1,30 @@
 # Genesis validator setup
 
+A genesis validator is one which is a validator right from the first block of the chain - i.e. at genesis. The details of genesis validators are hardcoded into the genesis file that is distributed to all users who want to interact with a chain.
+
 ## Pre-genesis
 
 To setup all the [required keys](#required-keys) for a genesis validator for an upcoming network, you can execute the following command with an alias of your choice. Note that this alias is public (the address of your validator account will be visible in every wallet) and must be unique within the network.
 
 You must also provide a static `{IP:port}` to the `--net-address` argument of your future node's P2P address.
 
+```admonish info
+If you are setting up to be a genesis validator for a real network, the net address must be reachable over the public internet.
+```
+
 ```shell
 export ALIAS="1337-validator"
+
+# for a real node running over the public internet
 anoma client utils init-genesis-validator \
     --alias $ALIAS \
     --net-address 1.2.3.4:26656
+
+# for use with a local chain during development
+cargo run --bin anomac utils init-genesis-validator \
+    --alias $ALIAS \
+    --net-address 127.0.0.1:26656 \
+    --unsafe-dont-encrypt
 ```
 
 After generating your keys, the command will print something like this:
@@ -19,9 +33,9 @@ After generating your keys, the command will print something like this:
 Pre-genesis TOML written to .anoma/pre-genesis/1337-validator/validator.toml
 ```
 
-This file is the public configuration of your validator. You can safely share this file with the network's organizer, who is responsible for setting up and publishing the finalized genesis file and Anoma configuration for the chain.
+This file is the public configuration of your validator. You can safely share this file with the network's organizer, who is responsible for setting up and publishing the finalized genesis file and Anoma configuration for the chain. If you are setting up a local chain, see [here](../developer-guide/README.md#Creating a network configuration file) for details on using the configuration of your validator.
 
-Note that the wallet containing your private keys will also be written into this directory.
+Note that the wallet containing your private keys will also be written into this directory. 
 
 ## After network config release
 
