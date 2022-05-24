@@ -1,5 +1,12 @@
 # Genesis validator setup
 
+A genesis validator is one which is a validator right from the first block of the chain - i.e. at genesis. The details of genesis validators are hardcoded into the genesis file that is distributed to all users who want to interact with a chain.
+
+### Prerequisites
+
+- a machine that meets the [requirements](../user-guide/install.md#hardware-requirements) for running a validator node
+- an associated public IPv4 address with ports 26656 reachable from anywhere for P2P connections
+
 ## Pre-genesis
 
 To setup all the [required keys](#required-keys) for a genesis validator for an upcoming network, you can execute the following command with an alias of your choice. Note that this alias is public (the address of your validator account will be visible in every wallet) and must be unique within the network.
