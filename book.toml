@@ -7,7 +7,7 @@ src = "src"
 title = "Anoma Docs"
 
 [output.html]
-edit-url-template = "https://github.com/anoma/docs/edit/master/{path}"
+edit-url-template = "https://github.com/anoma/docs/edit/main/{path}"
 git-repository-url = "https://github.com/anoma/docs"
 additional-css = ["assets/custom.css", "assets/mdbook-admonish.css"]
 git-branch = "main"
