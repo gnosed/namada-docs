@@ -12,7 +12,7 @@ Future testnets will include more features as described in [the Namada spec](htt
 Latest values regarding the testnet that would be useful to have in your shell:
 
 ```shell
-export ANOMA_CHAIN_ID='namada-cq-1.648898db560684647c'
+export ANOMA_CHAIN_ID='namada-cq-2.a6ebeb093671093b21'
 export ANOMA_COMMIT='f1afdffd5e43ad4bb448db7bf5bc1e23464350f7'
 ```
 
